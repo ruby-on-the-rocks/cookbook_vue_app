@@ -11,7 +11,11 @@
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  width: 250px;
+}
+</style>
 
 <script>
 var axios = require("axios");
