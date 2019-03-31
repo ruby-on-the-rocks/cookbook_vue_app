@@ -2,7 +2,11 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
-    <p>My recipes: {{ recipes }}</p>
+    <div v-for="recipe in recipes">
+      <h2>Title: {{ recipe.title }}</h2>
+      <p>Ingredients: {{ recipe.ingredients }}</p>
+      <p>Directions: {{ recipe.directions }}</p>
+    </div>
   </div>
 </template>
 
