@@ -4,6 +4,7 @@
     <p>My name is {{ name }}!</p>
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
+      <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
     </div>
@@ -30,6 +31,7 @@ export default {
     // JAVASCRIPT WEB REQUEST
     axios.get("/api/recipes").then(response => {
       this.recipes = response.data;
+      console.log(this.recipes);
     });
   },
   methods: {}
