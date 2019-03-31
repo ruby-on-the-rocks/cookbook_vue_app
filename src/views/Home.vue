@@ -51,7 +51,7 @@ export default {
         body_directions: "example directions"
       };
       axios.post("/api/recipes", params).then(response => {
-        console.log("Success", response.data);
+        this.recipes.push(response.data);
       });
     }
   }
