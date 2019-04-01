@@ -3,6 +3,20 @@
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
     <h1>New Recipe</h1>
+    <div>
+      Title:
+      <input type="text" v-model="newRecipeTitle" />
+      Chef:
+      <input type="text" v-model="newRecipeChef" />
+      Prep time:
+      <input type="text" v-model="newRecipePrepTime" />
+      Ingredients:
+      <input type="text" v-model="newRecipeIngredients" />
+      Directions:
+      <input type="text" v-model="newRecipeDirections" />
+      Image url:
+      <input type="text" v-model="newRecipeImageUrl" />
+    </div>
     <button v-on:click="createRecipe()">Create recipe</button>
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
@@ -27,7 +41,13 @@ export default {
     return {
       message: "Welcome to Vue.js!!!",
       name: "Peter",
-      recipes: []
+      recipes: [],
+      newRecipeTitle: "",
+      newRecipeChef: "",
+      newRecipePrepTime: "",
+      newRecipeIngredients: "",
+      newRecipeDirections: "",
+      newRecipeImageUrl: ""
     };
   },
   created: function() {
@@ -44,11 +64,11 @@ export default {
     createRecipe: function() {
       console.log("Create the recipe...");
       var params = {
-        body_title: "example title",
-        body_chef: "example chef",
-        body_prep_time: 100,
-        body_ingredients: "example ingredients",
-        body_directions: "example directions"
+        body_title: this.newRecipeTitle,
+        body_chef: this.newRecipeChef,
+        body_prep_time: this.newRecipePrepTime,
+        body_ingredients: this.newRecipeIngredients,
+        body_directions: this.newRecipeDirections
       };
       axios.post("/api/recipes", params).then(response => {
         this.recipes.push(response.data);
