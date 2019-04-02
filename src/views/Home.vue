@@ -22,7 +22,7 @@
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
       <div>
-        <button v-on:click="currentRecipe = recipe">More info</button>
+        <button v-on:click="showRecipe(recipe)">More info</button>
       </div>
       <div v-if="recipe === currentRecipe">
         <p>Prep time: {{ recipe.prep_time }}</p>
@@ -80,6 +80,13 @@ export default {
       axios.post("/api/recipes", params).then(response => {
         this.recipes.push(response.data);
       });
+    },
+    showRecipe: function(recipe) {
+      if (this.currentRecipe === recipe) {
+        this.currentRecipe = null;
+      } else {
+        this.currentRecipe = recipe;
+      }
     }
   }
 };
