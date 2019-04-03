@@ -3,6 +3,9 @@
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
     <h1>New Recipe</h1>
+    <ul>
+      <li v-for="error in errors">{{ error }}</li>
+    </ul>
     <div>
       Title:
       <input type="text" v-model="newRecipeTitle" />
@@ -71,7 +74,8 @@ export default {
       newRecipeIngredients: "",
       newRecipeDirections: "",
       newRecipeImageUrl: "",
-      currentRecipe: null
+      currentRecipe: null,
+      errors: []
     };
   },
   created: function() {
@@ -87,6 +91,7 @@ export default {
   methods: {
     createRecipe: function() {
       console.log("Create the recipe...");
+      this.errors = [];
       var params = {
         body_title: this.newRecipeTitle,
         body_chef: this.newRecipeChef,
@@ -94,9 +99,15 @@ export default {
         body_ingredients: this.newRecipeIngredients,
         body_directions: this.newRecipeDirections
       };
-      axios.post("/api/recipes", params).then(response => {
-        this.recipes.push(response.data);
-      });
+      axios
+        .post("/api/recipes", params)
+        .then(response => {
+          this.recipes.push(response.data);
+        })
+        .catch(error => {
+          console.log(error.response.data.errors);
+          this.errors = error.response.data.errors;
+        });
     },
     showRecipe: function(recipe) {
       if (this.currentRecipe === recipe) {
