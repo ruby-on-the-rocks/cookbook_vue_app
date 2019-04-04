@@ -2,25 +2,6 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
-    <h1>New Recipe</h1>
-    <ul>
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
-    <div>
-      Title:
-      <input type="text" v-model="newRecipeTitle" />
-      Chef:
-      <input type="text" v-model="newRecipeChef" />
-      Prep time:
-      <input type="text" v-model="newRecipePrepTime" />
-      Ingredients:
-      <input type="text" v-model="newRecipeIngredients" />
-      Directions:
-      <input type="text" v-model="newRecipeDirections" />
-      Image url:
-      <input type="text" v-model="newRecipeImageUrl" />
-    </div>
-    <button v-on:click="createRecipe()">Create recipe</button>
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
@@ -68,14 +49,7 @@ export default {
       message: "Welcome to Vue.js!!!",
       name: "Peter",
       recipes: [],
-      newRecipeTitle: "",
-      newRecipeChef: "",
-      newRecipePrepTime: "",
-      newRecipeIngredients: "",
-      newRecipeDirections: "",
-      newRecipeImageUrl: "",
-      currentRecipe: null,
-      errors: []
+      currentRecipe: null
     };
   },
   created: function() {
@@ -89,26 +63,6 @@ export default {
     });
   },
   methods: {
-    createRecipe: function() {
-      console.log("Create the recipe...");
-      this.errors = [];
-      var params = {
-        body_title: this.newRecipeTitle,
-        body_chef: this.newRecipeChef,
-        body_prep_time: this.newRecipePrepTime,
-        body_ingredients: this.newRecipeIngredients,
-        body_directions: this.newRecipeDirections
-      };
-      axios
-        .post("/api/recipes", params)
-        .then(response => {
-          this.recipes.push(response.data);
-        })
-        .catch(error => {
-          console.log(error.response.data.errors);
-          this.errors = error.response.data.errors;
-        });
-    },
     showRecipe: function(recipe) {
       if (this.currentRecipe === recipe) {
         this.currentRecipe = null;
