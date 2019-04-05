@@ -4,21 +4,23 @@
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
-    <div>
-      Title:
-      <input type="text" v-model="newRecipeTitle" />
-      Chef:
-      <input type="text" v-model="newRecipeChef" />
-      Prep time:
-      <input type="text" v-model="newRecipePrepTime" />
-      Ingredients:
-      <input type="text" v-model="newRecipeIngredients" />
-      Directions:
-      <input type="text" v-model="newRecipeDirections" />
-      Image url:
-      <input type="text" v-model="newRecipeImageUrl" />
-    </div>
-    <button v-on:click="createRecipe()">Create recipe</button>
+    <form v-on:submit.prevent="createRecipe()">
+      <div>
+        Title:
+        <input type="text" v-model="newRecipeTitle" />
+        Chef:
+        <input type="text" v-model="newRecipeChef" />
+        Prep time:
+        <input type="text" v-model="newRecipePrepTime" />
+        Ingredients:
+        <input type="text" v-model="newRecipeIngredients" />
+        Directions:
+        <input type="text" v-model="newRecipeDirections" />
+        Image url:
+        <input type="text" v-model="newRecipeImageUrl" />
+      </div>
+      <input type="submit" value="Create recipe" />
+    </form>
   </div>
 </template>
 
