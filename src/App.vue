@@ -63,6 +63,8 @@
       <router-link to="/recipes/new">Make a recipe</router-link>
       |
       <router-link to="/signup">Signup</router-link>
+      |
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view />
   </div>
