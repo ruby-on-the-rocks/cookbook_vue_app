@@ -4,6 +4,7 @@ import RecipesIndex from "./views/RecipesIndex.vue";
 import RecipesNew from "./views/RecipesNew.vue";
 import RecipesShow from "./views/RecipesShow.vue";
 import RecipesEdit from "./views/RecipesEdit.vue";
+import Signup from "./views/Signup.vue";
 
 Vue.use(Router);
 
@@ -11,6 +12,7 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    { path: "/signup", name: "signup", component: Signup },
     {
       path: "/",
       name: "home",
