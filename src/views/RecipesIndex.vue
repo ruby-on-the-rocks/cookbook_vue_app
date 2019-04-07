@@ -32,10 +32,18 @@ export default {
     // response = HTTP.get("/api/products")
     // @recipes = response.data;
     // JAVASCRIPT WEB REQUEST
-    axios.get("/api/recipes").then(response => {
-      this.recipes = response.data;
-      console.log(this.recipes);
-    });
+    axios
+      .get("/api/recipes")
+      .then(response => {
+        this.recipes = response.data;
+        console.log(this.recipes);
+      })
+      .catch(error => {
+        console.log("Something went wrong...", error);
+        if (error.response && error.response.status === 401) {
+          this.$router.push("/login");
+        }
+      });
   },
   methods: {}
 };
