@@ -3,7 +3,10 @@
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
     Search by title or ingredients:
-    <input type="text" v-model="searchFilter" />
+    <input type="text" v-model="searchFilter" list="titles" />
+    <datalist id="titles">
+      <option v-for="recipe in recipes">{{ recipe.title }}</option>
+    </datalist>
     <div v-for="recipe in filterBy(recipes, searchFilter, 'title', 'ingredients')">
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
