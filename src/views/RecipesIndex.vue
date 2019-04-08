@@ -2,7 +2,9 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
-    <div v-for="recipe in recipes">
+    Search by title or ingredients:
+    <input type="text" v-model="searchFilter" />
+    <div v-for="recipe in filterBy(recipes, searchFilter, 'title', 'ingredients')">
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
       <router-link v-bind:to="`/recipes/${recipe.id}`">More info</router-link>
@@ -18,13 +20,16 @@ img {
 
 <script>
 var axios = require("axios");
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Welcome to Vue.js!!!",
       name: "Peter",
-      recipes: []
+      recipes: [],
+      searchFilter: ""
     };
   },
   created: function() {
