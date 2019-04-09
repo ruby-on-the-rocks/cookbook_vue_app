@@ -2,12 +2,16 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <p>My name is {{ name }}!</p>
+    <div>
+      <button v-on:click="setSortAttribute('title')">Sort by title</button>
+      <button v-on:click="setSortAttribute('ingredients')">Sort by ingredients</button>
+    </div>
     Search by title or ingredients:
     <input type="text" v-model="searchFilter" list="titles" />
     <datalist id="titles">
       <option v-for="recipe in recipes">{{ recipe.title }}</option>
     </datalist>
-    <div v-for="recipe in filterBy(recipes, searchFilter, 'title', 'ingredients')">
+    <div v-for="recipe in orderBy(filterBy(recipes, searchFilter, 'title', 'ingredients'), sortAttribute)">
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
       <router-link v-bind:to="`/recipes/${recipe.id}`">More info</router-link>
@@ -32,7 +36,8 @@ export default {
       message: "Welcome to Vue.js!!!",
       name: "Peter",
       recipes: [],
-      searchFilter: ""
+      searchFilter: "",
+      sortAttribute: "title"
     };
   },
   created: function() {
@@ -53,6 +58,10 @@ export default {
         }
       });
   },
-  methods: {}
+  methods: {
+    setSortAttribute: function(inputAttribute) {
+      this.sortAttribute = inputAttribute;
+    }
+  }
 };
 </script>
