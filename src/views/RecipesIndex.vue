@@ -11,11 +11,16 @@
     <datalist id="titles">
       <option v-for="recipe in recipes">{{ recipe.title }}</option>
     </datalist>
-    <div v-for="recipe in orderBy(filterBy(recipes, searchFilter, 'title', 'ingredients'), sortAttribute)">
-      <h2>Title: {{ recipe.title }}</h2>
-      <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
-      <router-link v-bind:to="`/recipes/${recipe.id}`">More info</router-link>
-    </div>
+    <transition-group appear enter-active-class="animated rollIn" leave-active-class="animated bounceOutDown">
+      <div
+        v-for="recipe in orderBy(filterBy(recipes, searchFilter, 'title', 'ingredients'), sortAttribute)"
+        v-bind:key="recipe.id"
+      >
+        <h2>Title: {{ recipe.title }}</h2>
+        <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title" />
+        <router-link v-bind:to="`/recipes/${recipe.id}`">More info</router-link>
+      </div>
+    </transition-group>
   </div>
 </template>
 
