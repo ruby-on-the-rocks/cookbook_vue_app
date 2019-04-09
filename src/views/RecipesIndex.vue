@@ -13,7 +13,7 @@
     </datalist>
     <transition-group appear enter-active-class="animated rollIn" leave-active-class="animated bounceOutDown">
       <div
-        v-for="recipe in orderBy(filterBy(recipes, searchFilter, 'title', 'ingredients'), sortAttribute)"
+        v-for="recipe in orderBy(filterBy(recipes, searchFilter, 'title', 'ingredients'), sortAttribute, sortAscending)"
         v-bind:key="recipe.id"
       >
         <h2>Title: {{ recipe.title }}</h2>
@@ -42,7 +42,8 @@ export default {
       name: "Peter",
       recipes: [],
       searchFilter: "",
-      sortAttribute: "title"
+      sortAttribute: "title",
+      sortAscending: 1
     };
   },
   created: function() {
@@ -65,6 +66,15 @@ export default {
   },
   methods: {
     setSortAttribute: function(inputAttribute) {
+      if (this.sortAttribute === inputAttribute) {
+        if (this.sortAscending === 1) {
+          this.sortAscending = -1;
+        } else {
+          this.sortAscending = 1;
+        }
+      } else {
+        this.sortAscending = 1;
+      }
       this.sortAttribute = inputAttribute;
     }
   }
