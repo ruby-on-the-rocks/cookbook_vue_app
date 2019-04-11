@@ -9,8 +9,15 @@
 
     <router-link v-bind:to="`/recipes/${recipe.id}/edit`">Edit this recipe</router-link>
     <router-link to="/">Back to all recipes</router-link>
+    <div id="map"></div>
   </div>
 </template>
+
+<style>
+#map {
+  height: 300px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -24,6 +31,16 @@ export default {
   created: function() {
     axios.get("/api/recipes/" + this.$route.params.id).then(response => {
       this.recipe = response.data;
+    });
+  },
+  mounted: function() {
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoicGV0ZXJ4amFuZyIsImEiOiJjam96NnBwZmUycXI4M3FxaTR3aHQwenhkIn0.Fip_rZYF_exdMEDeQTNYoQ";
+    var map = new mapboxgl.Map({
+      container: "map", // container id
+      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+      center: [-74.5, 40], // starting position [lng, lat]
+      zoom: 4 // starting zoom
     });
   },
   methods: {
