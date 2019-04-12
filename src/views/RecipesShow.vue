@@ -45,6 +45,13 @@ export default {
       center: [-74.5, 40], // starting position [lng, lat]
       zoom: 4 // starting zoom
     });
+
+    var popup = new mapboxgl.Popup({ offset: 25 }).setText("Construction on the Washington Monument began in 1848.");
+
+    var marker = new mapboxgl.Marker()
+      .setLngLat([30.5, 50.5])
+      .setPopup(popup)
+      .addTo(map);
   },
   methods: {
     destroyRecipe: function(recipe) {
