@@ -16,10 +16,13 @@
 <style>
 #map {
   height: 300px;
+  text-align: initial;
 }
 </style>
 
 <script>
+/* global mapboxgl */
+
 import axios from "axios";
 
 export default {
