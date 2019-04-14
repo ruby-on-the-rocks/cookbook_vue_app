@@ -62,14 +62,28 @@
       |
       <router-link to="/recipes/new">Make a recipe</router-link>
       |
-      <router-link to="/signup">Signup</router-link>
+      <router-link to="/signup" v-if="!jwt">Signup</router-link>
       |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login" v-if="!jwt">Login</router-link>
       |
-      <router-link to="/logout">Logout</router-link>
+      <router-link to="/logout" v-if="jwt">Logout</router-link>
     </div>
     <router-view />
   </div>
 </template>
 
 <style></style>
+
+<script>
+export default {
+  data: function() {
+    return {
+      jwt: null
+    };
+  },
+  created: function() {
+    this.jwt = localStorage.jwt;
+    console.log("My jwt is", this.jwt);
+  }
+};
+</script>
