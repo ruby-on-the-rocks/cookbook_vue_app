@@ -68,7 +68,7 @@
       |
       <router-link to="/logout" v-if="jwt">Logout</router-link>
     </div>
-    <router-view />
+    <router-view v-on:changeJwt="setJwt()" />
   </div>
 </template>
 
@@ -84,6 +84,11 @@ export default {
   created: function() {
     this.jwt = localStorage.jwt;
     console.log("My jwt is", this.jwt);
+  },
+  methods: {
+    setJwt: function() {
+      this.jwt = localStorage.jwt;
+    }
   }
 };
 </script>
